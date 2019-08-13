@@ -1,8 +1,11 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.5.0 <0.6.0;
 
 import "./ReentrancyGuard.sol";
 import "./MSignatureValidator.sol";
 import "./MTransactions.sol";
+import "./LibBytes.sol";
+import "./IWallet.sol";
+import "./IValidator.sol";
 
 contract MixinSignatureValidator is
     ReentrancyGuard,
@@ -24,7 +27,7 @@ contract MixinSignatureValidator is
     function preSign(
         bytes32 hash,
         address signerAddress,
-        bytes signature
+        bytes calldata signature
     )
         external
     {
@@ -211,13 +214,13 @@ contract MixinSignatureValidator is
     function isValidWalletSignature(
         bytes32 hash,
         address walletAddress,
-        bytes signature
+        bytes memory signature
     )
         internal
         view
         returns (bool isValid)
     {
-        bytes calldata = abi.encodeWithSelector(
+        bytes memory data = abi.encodeWithSelector(
             IWallet(walletAddress).isValidSignature.selector,
             hash,
             signature
@@ -233,12 +236,12 @@ contract MixinSignatureValidator is
                 revert(0, 100)
             }
 
-            let cdStart := add(calldata, 32)
+            let cdStart := add(data, 32)
             let success := staticcall(
                 gas,              // forward all gas
                 walletAddress,    // address of Wallet contract
                 cdStart,          // pointer to start of input
-                mload(calldata),  // length of input
+                mload(data),  // length of input
                 cdStart,          // write output over input
                 32                // output size is 32 bytes
             )
@@ -282,13 +285,13 @@ contract MixinSignatureValidator is
         address validatorAddress,
         bytes32 hash,
         address signerAddress,
-        bytes signature
+        bytes memory signature
     )
         internal
         view
         returns (bool isValid)
     {
-        bytes memory calldata = abi.encodeWithSelector(
+        bytes memory data = abi.encodeWithSelector(
             IValidator(signerAddress).isValidSignature.selector,
             hash,
             signerAddress,
@@ -305,12 +308,12 @@ contract MixinSignatureValidator is
                 revert(0, 100)
             }
 
-            let cdStart := add(calldata, 32)
+            let cdStart := add(data, 32)
             let success := staticcall(
                 gas,               // forward all gas
                 validatorAddress,  // address of Validator contract
                 cdStart,           // pointer to start of input
-                mload(calldata),   // length of input
+                mload(data),   // length of input
                 cdStart,           // write output over input
                 32                 // output size is 32 bytes
             )

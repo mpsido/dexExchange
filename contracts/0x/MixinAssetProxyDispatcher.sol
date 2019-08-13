@@ -1,14 +1,15 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.5.0 <0.6.0;
 
 import "./Ownable.sol";
 import "./MAssetProxyDispatcher.sol";
+import "./IAssetProxy.sol";
 
 contract MixinAssetProxyDispatcher is
     Ownable,
     MAssetProxyDispatcher
 {
     // Mapping from Asset Proxy Id's to their respective Asset Proxy
-    mapping (bytes4 => IAssetProxy) public assetProxies;
+    mapping (bytes4 => address) public assetProxies;
 
     /// @dev Registers an asset proxy to its asset proxy id.
     ///      Once an asset proxy is registered, it cannot be unregistered.
@@ -17,10 +18,8 @@ contract MixinAssetProxyDispatcher is
         external
         onlyOwner
     {
-        IAssetProxy assetProxyContract = IAssetProxy(assetProxy);
-
         // Ensure that no asset proxy exists with current id.
-        bytes4 assetProxyId = assetProxyContract.getProxyId();
+        bytes4 assetProxyId = IAssetProxy(assetProxy).getProxyId();
         address currentAssetProxy = assetProxies[assetProxyId];
         require(
             currentAssetProxy == address(0),
@@ -28,7 +27,7 @@ contract MixinAssetProxyDispatcher is
         );
 
         // Add asset proxy and log registration.
-        assetProxies[assetProxyId] = assetProxyContract;
+        assetProxies[assetProxyId] = assetProxy;
         emit AssetProxyRegistered(
             assetProxyId,
             assetProxy

@@ -1,5 +1,4 @@
-pragma solidity 0.4.24;
-
+pragma solidity >=0.5.0 <0.6.0;
 
 contract ITransactions {
 
@@ -11,8 +10,8 @@ contract ITransactions {
     function executeTransaction(
         uint256 salt,
         address signerAddress,
-        bytes data,
-        bytes signature
+        bytes calldata data,
+        bytes calldata signature
     )
         external;
 }

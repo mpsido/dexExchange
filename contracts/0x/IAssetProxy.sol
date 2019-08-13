@@ -1,4 +1,4 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.5.0 <0.6.0;
 
 import "./IAuthorizable.sol";
 
@@ -11,7 +11,7 @@ contract IAssetProxy is
     /// @param to Address to transfer asset to.
     /// @param amount Amount of asset to transfer.
     function transferFrom(
-        bytes assetData,
+        bytes calldata assetData,
         address from,
         address to,
         uint256 amount

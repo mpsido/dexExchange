@@ -1,4 +1,4 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.5.0 <0.6.0;
 
 import "./LibEIP712.sol";
 import "./MSignatureValidator.sol";
@@ -25,8 +25,8 @@ contract MixinTransactions is
     function executeTransaction(
         uint256 salt,
         address signerAddress,
-        bytes data,
-        bytes signature
+        bytes calldata data,
+        bytes calldata signature
     )
         external
     {
@@ -66,8 +66,9 @@ contract MixinTransactions is
 
         // Execute transaction
         transactions[transactionHash] = true;
+        (bool success,) = address(this).delegatecall(data);
         require(
-            address(this).delegatecall(data),
+            success,
             "FAILED_EXECUTION"
         );
 

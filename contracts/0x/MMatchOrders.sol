@@ -1,6 +1,6 @@
-pragma solidity 0.4.24;
+pragma solidity >=0.5.0 <0.6.0;
 
-import "./MMatchOrders.sol";
+import "./IMatchOrders.sol";
 
 
 contract MMatchOrders is
