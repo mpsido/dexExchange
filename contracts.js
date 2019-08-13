@@ -53,9 +53,12 @@ module.exports = {
 
     contracts: {
       // example:
-      //SimpleStorage: {
-      //  args: [ 100 ]
-      //}
+      LibConstants: {
+       args: [ "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570" ] // !!! SHOULD BE POSSIBLE TO CHANGE THE ASSSET USED FOR FEES HERE
+      },
+      LibEIP712: {
+        args: ["www.dex.cahnge", "3.3.2"]
+      }
     }
   },
 
