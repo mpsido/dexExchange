@@ -1,10 +1,10 @@
 pragma solidity >=0.5.0 <0.6.0;
 pragma experimental ABIEncoderV2;
 
-import "./ReentrancyGuard.sol";
-import "./LibMath.sol";
-import "./LibFillResults.sol";
-import "./LibAbiEncoder.sol";
+import "../libs/ReentrancyGuard.sol";
+import "../libs/LibMath.sol";
+import "../libs/LibFillResults.sol";
+import "../libs/LibAbiEncoder.sol";
 import "./MExchangeCore.sol";
 import "./MWrapperFunctions.sol";
 

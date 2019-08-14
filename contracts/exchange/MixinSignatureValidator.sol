@@ -1,9 +1,9 @@
 pragma solidity >=0.5.0 <0.6.0;
 
-import "./ReentrancyGuard.sol";
+import "../libs/ReentrancyGuard.sol";
 import "./MSignatureValidator.sol";
 import "./MTransactions.sol";
-import "./LibBytes.sol";
+import "../libs/LibBytes.sol";
 import "./IWallet.sol";
 import "./IValidator.sol";
 

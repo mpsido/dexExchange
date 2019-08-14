@@ -4,7 +4,7 @@ import "./MixinExchangeCore.sol";
 import "./MixinMatchOrders.sol";
 import "./MixinSignatureValidator.sol";
 import "./MixinTransactions.sol";
-import "./MixinAssetProxyDispatcher.sol";
+import "../assetProxy/MixinAssetProxyDispatcher.sol";
 import "./MixinWrapperFunctions.sol";
 
 

@@ -1,9 +1,9 @@
 pragma solidity >=0.5.0 <0.6.0;
 pragma experimental ABIEncoderV2;
-import "./ReentrancyGuard.sol";
-import "./LibConstants.sol";
-import "./LibMath.sol";
-import "./MAssetProxyDispatcher.sol";
+import "../libs/ReentrancyGuard.sol";
+import "../libs/LibConstants.sol";
+import "../libs/LibMath.sol";
+import "../assetProxy/MAssetProxyDispatcher.sol";
 import "./MExchangeCore.sol";
 import "./MMatchOrders.sol";
 import "./MTransactions.sol";
