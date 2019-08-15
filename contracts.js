@@ -66,7 +66,12 @@ module.exports = {
       Exchange: {
         // gas: 2000000,
         args: ["0x"]
+      },
+      Proxy: {
+        // gas: 2000000,
+        args: ["$Exchange"]
       }
+
     }
   },
 
