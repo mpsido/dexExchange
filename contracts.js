@@ -49,15 +49,23 @@ module.exports = {
     //            when not specified
     // - explicit will only attempt to deploy the contracts that are explicitly specified inside the
     //            contracts section.
-    //strategy: 'implicit',
+    // strategy: 'explicit',
 
     contracts: {
       // example:
       LibConstants: {
        args: [ "0x6ff6c0ff1d68b964901f986d4c9fa3ac68346570" ] // !!! SHOULD BE POSSIBLE TO CHANGE THE ASSSET USED FOR FEES HERE
       },
-      LibEIP712: {
-        args: ["www.dex.cahnge", "3.3.2"]
+      // LibEIP712: {
+      //   args: ["www.dex.cahnge", "3.3.2"]
+      // },
+      // MixinExchangeCore: {
+      //   deploy: true
+      // },
+
+      Exchange: {
+        // gas: 2000000,
+        args: ["0x"]
       }
     }
   },
